@@ -1,0 +1,30 @@
+{% extends 'index.html'%}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>the counter :{{ counter}}</h1>
+    <ul>
+        {%for i in card %}
+        <li>{{i}}</li>
+        {%endfor%}
+    </ul>
+    {% for item in shopping_items%}
+    <div class="row">
+        <div class="card" style="width: 18rem;">
+
+
+            <img src="{{item.img}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <form action="/add_to_card" method="POST">
+                    <h5 class="card-title">{{item.productName}}</h5>
+                    <p class="card-text">{{item.productText}}</p>
+                    <input type="hidden" name="product_name" value="{{item.productName}}">
+                    {% csrf_token%}
+                    <button type="submit" class="btn btn-primary">Go somewhere</button>
+            </div>
+        </div>
+        </form>
+        {%endfor%}
+        {% endblock %}
